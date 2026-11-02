@@ -83,6 +83,22 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 Text("FALSE")
             }
         }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Button(
+                onClick = {},
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF6200EE)
+                )
+            ) {
+                Text("NEXT  ❯")
+            }
+        }
     }
 }
 
