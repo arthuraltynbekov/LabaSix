@@ -122,7 +122,12 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             horizontalArrangement = Arrangement.End
         ) {
             Button(
-                onClick = {},
+                onClick = {
+                    if (questionIndex.value < questions.lastIndex) {
+                        questionIndex.value++
+                        answered.value = false
+                    }
+                },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFF6200EE)
                 )
