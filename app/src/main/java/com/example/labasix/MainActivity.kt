@@ -1,5 +1,9 @@
 package com.example.labasix
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.labasix.ui.theme.LabaSixTheme
+import androidx.compose.foundation.layout.Column
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,10 +37,24 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+    Column(modifier = modifier.fillMaxSize()) {
+
+        Text(
+            text = "GeoQuiz",
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color(0xFF6200EE))
+                .padding(16.dp),
+            color = Color.White
+        )
+
+        Text(
+            text = "Canberra is the capital of Australia.",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        )
+    }
 }
 
 @Preview(showBackground = true)
