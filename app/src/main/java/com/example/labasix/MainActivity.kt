@@ -21,6 +21,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,8 +41,22 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+data class QuizQuestion(
+    val text: String,
+    val answer: Boolean
+)
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
+    val questions = listOf(
+        QuizQuestion("Canberra is the capital of Australia.", true),
+        QuizQuestion("The Pacific Ocean is larger than the Atlantic Ocean.", true),
+        QuizQuestion("The Suez Canal connects the Red Sea and the Indian Ocean.", false),
+        QuizQuestion("The source of the Nile River is in Egypt.", false),
+        QuizQuestion("The Amazon River is the longest river in the Americas.", true),
+        QuizQuestion("Lake Baikal is the world's oldest and deepest freshwater lake.", true)
+    )
+
+    val questionIndex = remember { mutableStateOf(0) }
     Column(modifier = modifier.fillMaxSize()) {
 
         Text(
@@ -53,7 +69,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         )
 
         Text(
-            text = "Canberra is the capital of Australia.",
+            text = questions[questionIndex.value].text,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
