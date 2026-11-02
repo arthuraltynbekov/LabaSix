@@ -115,6 +115,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             }
         }
 
+        if (questionIndex.value != questions.lastIndex || !answered.value) {
+
+        }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
