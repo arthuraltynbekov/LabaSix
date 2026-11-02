@@ -143,6 +143,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                         answered.value = false
                     }
                 },
+                enabled = answered.value,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFF6200EE)
                 )
