@@ -23,6 +23,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableStateOf
+import android.widget.Toast
+import androidx.compose.ui.platform.LocalContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +62,26 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     val answered = remember { mutableStateOf(false) }
     val score = remember { mutableStateOf(0) }
 
+    val context = LocalContext.current
+
+    fun submitAnswer(userAnswer: Boolean) {
+        if (answered.value) return
+
+        answered.value = true
+
+        if (questions[questionIndex.value].answer == userAnswer) {
+            score.value++
+        }
+
+        if (questionIndex.value == questions.lastIndex) {
+            Toast.makeText(
+                context,
+                "Правильных ответов: ${score.value} из ${questions.size}",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
     Column(modifier = modifier.fillMaxSize()) {
 
         Text(
@@ -86,12 +108,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Button(
-                    onClick = {
-                        answered.value = true
-                        if (questions[questionIndex.value].answer) {
-                            score.value++
-                        }
-                    },
+                    onClick = { submitAnswer(true) },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF6200EE)
                     )
@@ -100,12 +117,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 }
 
                 Button(
-                    onClick = {
-                        answered.value = true
-                        if (!questions[questionIndex.value].answer) {
-                            score.value++
-                        }
-                    },
+                    onClick = { submitAnswer(false) },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF6200EE)
                     )
