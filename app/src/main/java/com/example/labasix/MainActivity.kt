@@ -57,6 +57,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 
     val questionIndex = remember { mutableStateOf(0) }
+    val answered = remember { mutableStateOf(false) }
+    val score = remember { mutableStateOf(0) }
+
     Column(modifier = modifier.fillMaxSize()) {
 
         Text(
@@ -75,28 +78,40 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 .padding(16.dp)
         )
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Button(
-                onClick = {},
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF6200EE)
-                )
+        if (!answered.value) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text("TRUE")
-            }
+                Button(
+                    onClick = {
+                        answered.value = true
+                        if (questions[questionIndex.value].answer) {
+                            score.value++
+                        }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF6200EE)
+                    )
+                ) {
+                    Text("TRUE")
+                }
 
-            Button(
-                onClick = {},
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF6200EE)
-                )
-            ) {
-                Text("FALSE")
+                Button(
+                    onClick = {
+                        answered.value = true
+                        if (!questions[questionIndex.value].answer) {
+                            score.value++
+                        }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF6200EE)
+                    )
+                ) {
+                    Text("FALSE")
+                }
             }
         }
 
